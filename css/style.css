@@ -7,3 +7,8 @@
 .login-form input{width:100%;padding:13px;border-radius:10px;border:1px solid #285a8e;background:#081733;color:#fff}
 .login-message{margin-top:14px;color:#ffd27d}.nav-logout{margin-top:10px;width:100%;padding:11px 12px;border:1px solid #5d6f96;border-radius:10px;background:#321b30;color:#fff;text-align:left;cursor:pointer}
 .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:680px}th,td{padding:12px;border-bottom:1px solid #23466f;text-align:left}th{color:#8fdbea}
+
+.certificate-sheet{position:relative;max-width:850px;margin:24px auto;padding:42px;background:#fff;color:#111;border:8px double #222;min-height:900px}
+.certificate-sheet h1,.certificate-sheet h2{text-align:center}.certificate-grid{display:grid;grid-template-columns:220px 1fr;gap:12px;border-top:1px solid #333;padding-top:24px}
+.verify-box{display:flex;gap:20px;align-items:center;margin-top:40px}.demo-mark{position:absolute;inset:42% auto auto 18%;font-size:56px;opacity:.08;transform:rotate(-25deg);font-weight:900}
+#search{padding:11px;border-radius:9px;border:1px solid #31577c;background:#091b36;color:#fff;min-width:280px}

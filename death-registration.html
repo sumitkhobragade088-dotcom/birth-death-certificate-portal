@@ -1,30 +1,29 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Birth Registration</title><link rel="stylesheet" href="css/style.css"></head><body>
+<title>Death Registration</title><link rel="stylesheet" href="css/style.css"></head><body>
 <div class="app"><aside><h2>Birth Portal</h2><nav>
-<a href="admin.html">Dashboard</a><a class="active" href="birth-registration.html">Birth Registration</a>
-<a href="death-registration.html">Death Registration</a><a href="certificates.html">All Certificates</a>
+<a href="admin.html">Dashboard</a><a href="birth-registration.html">Birth Registration</a>
+<a class="active" href="death-registration.html">Death Registration</a><a href="certificates.html">All Certificates</a>
 <a href="hospital-management.html">Hospital Management</a><a href="verify.html">QR Verification</a>
-</nav></aside><main class="content"><header><div><h1>All State Birth Registration</h1><p>Birth certificate record creation</p></div></header>
+</nav></aside><main class="content"><header><div><h1>All State Death Registration</h1><p>Death certificate record creation</p></div></header>
 <section class="panel"><form id="certificateForm" class="form-grid">
 <label>State<select id="state" required><option value="">Select State</option></select></label>
 <label>District<select id="district"><option value="">Select District</option></select></label>
 <label>Hospital / Local Body<select id="localBody"><option value="">Select saved authority</option></select></label>
-<h3 class="full">Child Information</h3>
+<h3 class="full">Deceased Person</h3>
 <label>Full Name<input id="personName" required></label><label>Aadhaar Number<input id="aadhaar"></label>
 <label>Gender<select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></label>
-<label>Date of Birth<input id="eventDate" type="date" required></label><label>Place of Birth<input id="eventPlace"></label>
-<h3 class="full">Parents</h3>
-<label>Father Name<input id="fatherName"></label><label>Father Aadhaar<input id="fatherAadhaar"></label>
-<label>Mother Name<input id="motherName"></label><label>Mother Aadhaar<input id="motherAadhaar"></label>
+<label>Date of Death<input id="eventDate" type="date" required></label><label>Place of Death<input id="eventPlace"></label>
+<h3 class="full">Family Details</h3>
+<label>Father Name<input id="fatherName"></label><label>Mother Name<input id="motherName"></label><label>Spouse Name<input id="spouseName"></label>
 <h3 class="full">Address</h3>
-<label>Address at Birth<textarea id="addressEvent"></textarea></label><label>Permanent Address<textarea id="permanentAddress"></textarea></label>
+<label>Address at Death<textarea id="addressEvent"></textarea></label><label>Permanent Address<textarea id="permanentAddress"></textarea></label>
 <h3 class="full">Registration</h3>
 <label>Registration Number<input id="registrationNumber"></label><label>Date of Registration<input id="registrationDate" type="date"></label>
 <label>Issue Date<input id="issueDate" type="date"></label><label>Remarks<input id="remarks"></label>
-<div class="full"><button class="primary" type="submit">Save Birth Certificate</button> <button class="secondary" type="reset">Reset</button></div>
+<div class="full"><button class="primary" type="submit">Save Death Certificate</button> <button class="secondary" type="reset">Reset</button></div>
 <p id="formMessage" class="full login-message"></p>
 </form></section></main></div>
-<script>window.CERTIFICATE_TYPE="birth";</script>
+<script>window.CERTIFICATE_TYPE="death";</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/certificate-form.js"></script>
 </body></html>
