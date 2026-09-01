@@ -1,21 +1,20 @@
-ONLY RELATED FILES
+RELATED FILES ONLY — CLEAN PAGE-1 FLOW
 
 Replace:
-1) hospital-management.html
-2) js/hospital-master.js
-3) certificate-view.html
-4) js/certificate-master-view.js
+1. hospital-management.html
+2. js/hospital-page1-master.js
+3. certificate-view.html
+4. js/certificate-page1.js
 
-Then run:
-5) SUPABASE_HOSPITAL_MASTER_FIELDS.sql
+Run once:
+5. SUPABASE_PAGE1_MASTER_FIELDS.sql
 
-Hospital/Local Body Master now controls:
-State, District, Taluka/Block, authority type, English/local authority name,
-Government/state headings, department, Form number, both statutory paragraphs,
-both certification paragraphs, all requested local field labels, officer,
-English/local designation, issuing authority text, bottom slogan, address,
-state/authority logo, center emblem/logo, right/form logo, signature, seal,
-active/inactive, edit/update/delete.
+Defaults in Hospital Master follow the uploaded PDF Page 1 structure:
+Government heading, department, Form 5, Birth Certificate title, Act/Rules,
+certification paragraphs, local labels, issuing authority, designation,
+QR verification text and bottom slogan.
 
-Person/event data continues to come from Birth/Death registration.
-TEST / UNOFFICIAL remains only at the absolute bottom during development.
+Authority-specific values (State/District/Taluka/Local Body/logos/signature/seal)
+are saved per Hospital/Local Body and loaded into the certificate.
+
+Development output keeps TEST / UNOFFICIAL only at the absolute bottom.

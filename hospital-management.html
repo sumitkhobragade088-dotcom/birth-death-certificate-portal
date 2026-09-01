@@ -5,102 +5,75 @@
 <title>Hospital / Local Body Master</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-.master-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.master-grid .full{grid-column:1/-1}.master-grid label{display:block}
-.master-grid textarea{min-height:90px}
-.asset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.master-card{border:1px solid #d5d8df;border-radius:12px;padding:14px;margin:10px 0}
-.master-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-@media(max-width:760px){.master-grid,.asset-grid{grid-template-columns:1fr}.master-grid .full{grid-column:auto}}
-</style>
-</head>
-<body>
-<div class="app">
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}
+.grid label{display:block}.grid textarea{min-height:95px}.assets{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{border:1px solid #cfd3da;border-radius:12px;padding:14px;margin:10px 0}.actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+@media(max-width:760px){.grid,.assets{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head>
+<body><div class="app">
 <aside><h2>Birth Portal</h2><nav>
-<a href="admin.html">Dashboard</a>
-<a href="birth-registration.html">Birth Registration</a>
-<a class="active" href="hospital-management.html">Hospital Management</a>
-<a href="form5-template.html">Templates</a>
-</nav></aside>
+<a href="admin.html">Dashboard</a><a href="birth-registration.html">Birth Registration</a>
+<a class="active" href="hospital-management.html">Hospital Management</a></nav></aside>
 <main class="content">
-<header><div><h1>Hospital / Local Body Master</h1>
-<p>Complete certificate authority setup — State → District → Taluka/Block → Hospital/Local Body</p></div></header>
-
-<section class="panel">
-<h2 id="formHeading">Add Hospital / Local Body</h2>
-<form id="masterForm" class="master-grid">
-<input id="editId" type="hidden">
-
+<header><div><h1>Hospital / Local Body Master</h1><p>Page-1 certificate master</p></div></header>
+<section class="panel"><h2 id="heading">Add Hospital / Local Body</h2>
+<form id="f" class="grid"><input type="hidden" id="editId">
 <label>State<select id="state" required><option value="">Select State</option></select></label>
 <label>District<select id="district" required><option value="">Select District</option></select></label>
-<label>Taluka / Block<input id="taluka" placeholder="e.g. Deori"></label>
-<label>Authority Type<select id="authorityType">
-<option>Hospital</option><option>Gram Panchayat</option><option>Nagar Panchayat</option>
-<option>Municipal Council</option><option>Municipal Corporation</option><option>Municipality</option><option>Other</option>
-</select></label>
+<label>Taluka / Block<input id="taluka"></label>
+<label>Authority Type<select id="authorityType"><option>Hospital</option><option>Gram Panchayat</option><option>Nagar Panchayat</option><option>Municipal Council</option><option>Municipal Corporation</option><option>Other</option></select></label>
 
-<label>Authority / Hospital Name (English)<input id="nameEn" required></label>
-<label>Authority / Hospital Name (Local)<input id="nameLocal"></label>
-<label>Government / State Heading (English)<input id="governmentEn" placeholder="e.g. GOVERNMENT OF MAHARASHTRA"></label>
-<label>Government / State Heading (Local)<input id="governmentLocal"></label>
-<label>Department (English)<input id="departmentEn" placeholder="e.g. DEPARTMENT OF HEALTH"></label>
-<label>Department (Local)<input id="departmentLocal"></label>
-<label>Form Number (English)<input id="formNoEn" value="FORM 5"></label>
-<label>Form Number (Local)<input id="formNoLocal"></label>
+<label>Authority Name (English)<input id="nameEn" required></label>
+<label>Authority Name (Local)<input id="nameLocal"></label>
+<label>Government Heading (English)<input id="governmentEn" value="GOVERNMENT OF MAHARASHTRA"></label>
+<label>Government Heading (Local)<input id="governmentLocal" value="महाराष्ट्र शासन"></label>
+<label>Department (English)<input id="departmentEn" value="DEPARTMENT OF HEALTH"></label>
+<label>Department (Local)<input id="departmentLocal" value="आरोग्य विभाग"></label>
+<label>Form (English)<input id="formNoEn" value="FORM 5"></label>
+<label>Form (Local)<input id="formNoLocal" value="प्रपत्र-5"></label>
+<label>Certificate Title (English)<input id="birthTitleEn" value="BIRTH CERTIFICATE"></label>
+<label>Certificate Title (Local)<input id="birthTitleLocal" value="जन्म प्रमाण पत्र"></label>
 
-<label class="full">Statutory Text (English)
-<textarea id="statutoryEn" placeholder="Issued under Section..."></textarea></label>
-<label class="full">Statutory Text (Local Language)
-<textarea id="statutoryLocal"></textarea></label>
+<label class="full">Act / Rules (English)<textarea id="statutoryEn">(ISSUED UNDER SECTION 12/17 OF THE REGISTRATION OF BIRTHS & DEATHS ACT, 1969 AND RULE 8/13 OF THE MAHARASHTRA REGISTRATION OF BIRTHS & DEATHS RULES 2000.)</textarea></label>
+<label class="full">Act / Rules (Local)<textarea id="statutoryLocal">जन्म और मृत्यु पंजीकरण अधिनियम, 1969 की धारा 12/17 और महाराष्ट्र जन्म और मृत्यु पंजीकरण नियम, 2000 के नियम 8/13 के तहत जारी किया गया।</textarea></label>
+<label class="full">Certification Paragraph (English)<textarea id="certifyEn">THIS IS TO CERTIFY THAT THE FOLLOWING INFORMATION HAS BEEN TAKEN FROM THE ORIGINAL RECORD OF BIRTH WHICH IS THE REGISTER FOR {{AUTHORITY_EN}} OF TAHSIL/BLOCK {{TALUKA}} OF DISTRICT {{DISTRICT}} OF STATE/UNION TERRITORY {{STATE}}, INDIA.</textarea></label>
+<label class="full">Certification Paragraph (Local)<textarea id="certifyLocal">यह प्रमाणित किया जाता है कि निम्नलिखित जानकारी जन्म के मूल रिकॉर्ड के रजिस्टर, अर्थात् {{AUTHORITY_LOCAL}}, तालुका {{TALUKA}}, जिला {{DISTRICT}} से प्राप्त की गई है। भारत के {{STATE_LOCAL}} राज्य के रजिस्टर में दर्ज किया गया।</textarea></label>
 
-<label class="full">Certification Paragraph (English)
-<textarea id="certifyEn" placeholder="THIS IS TO CERTIFY THAT..."></textarea></label>
-<label class="full">Certification Paragraph (Local Language)
-<textarea id="certifyLocal"></textarea></label>
+<label>Name Label (Local)<input id="labelNameLocal" value="नाम"></label>
+<label>Gender Label (Local)<input id="labelGenderLocal" value="लिंग"></label>
+<label>DOB Label (Local)<input id="labelDobLocal" value="जन्म तिथि"></label>
+<label>Place of Birth Label (Local)<input id="labelPobLocal" value="जन्म स्थान"></label>
+<label>Mother Label (Local)<input id="labelMotherLocal" value="माता का नाम"></label>
+<label>Father Label (Local)<input id="labelFatherLocal" value="पिता का नाम"></label>
+<label>Birth Address Label (Local)<input id="labelBirthAddressLocal" value="बच्चे के जन्म के समय माता-पिता का पता"></label>
+<label>Permanent Address Label (Local)<input id="labelPermanentAddressLocal" value="माता-पिता के स्थायी पता"></label>
+<label>Registration No. Label (Local)<input id="labelRegNoLocal" value="पंजीकरण संख्या"></label>
+<label>Registration Date Label (Local)<input id="labelRegDateLocal" value="पंजीकरण तारीख"></label>
+<label>Remarks Label (Local)<input id="labelRemarksLocal" value="टिप्पणी (यदि कोई हो)"></label>
+<label>Issue Date Label (Local)<input id="labelIssueDateLocal" value="जारी करने की तिथि"></label>
 
-<label>Name Label (Local)<input id="labelNameLocal"></label>
-<label>Gender Label (Local)<input id="labelGenderLocal"></label>
-<label>Date of Birth Label (Local)<input id="labelDobLocal"></label>
-<label>Place of Birth Label (Local)<input id="labelPobLocal"></label>
-<label>Mother Name Label (Local)<input id="labelMotherLocal"></label>
-<label>Father Name Label (Local)<input id="labelFatherLocal"></label>
-<label>Address at Birth Label (Local)<input id="labelBirthAddressLocal"></label>
-<label>Permanent Address Label (Local)<input id="labelPermanentAddressLocal"></label>
-<label>Registration Number Label (Local)<input id="labelRegNoLocal"></label>
-<label>Registration Date Label (Local)<input id="labelRegDateLocal"></label>
-<label>Remarks Label (Local)<input id="labelRemarksLocal"></label>
-<label>Issue Date Label (Local)<input id="labelIssueDateLocal"></label>
+<label>Authorized Person<input id="authorizedPerson"></label>
+<label>Designation (English)<input id="designationEn" value="SUB-REGISTRAR (BIRTH & DEATH)"></label>
+<label>Designation (Local)<input id="designationLocal" value="उप-रजिस्ट्रार (जन्म व मृत्यु)"></label>
+<label>Issuing Authority (English)<input id="issuingAuthorityEn" value="SIGNATURE OF ISSUING AUTHORITY"></label>
+<label>Issuing Authority (Local)<input id="issuingAuthorityLocal" value="जारी करने वाला प्राधिकारी"></label>
+<label>Bottom Slogan (English)<input id="sloganEn" value="ENSURE REGISTRATION OF EVERY BIRTH AND DEATH"></label>
+<label>Bottom Slogan (Local)<input id="sloganLocal" value="प्रत्येक जन्म एवं मृत्यु का पंजीकरण सुनिश्चित करें"></label>
+<label>QR Text (English)<input id="qrTextEn" value="This QR code can be used to check the authenticity of the certificate"></label>
+<label>QR Text (Local)<input id="qrTextLocal"></label>
 
-<label>Authorized Person Name<input id="authorizedPerson"></label>
-<label>Designation (English)<input id="designationEn" placeholder="SUB-REGISTRAR (BIRTH & DEATH)"></label>
-<label>Designation (Local)<input id="designationLocal"></label>
-<label>Issuing Authority Text (English)<input id="issuingAuthorityEn" placeholder="SIGNATURE OF ISSUING AUTHORITY"></label>
-<label>Issuing Authority Text (Local)<input id="issuingAuthorityLocal"></label>
-<label>Bottom Slogan (English)<input id="sloganEn" placeholder="ENSURE REGISTRATION OF EVERY BIRTH AND DEATH"></label>
-<label>Bottom Slogan (Local)<input id="sloganLocal"></label>
-<label class="full">Authority Address<textarea id="address"></textarea></label>
-
-<div class="full asset-grid">
-<label>State / Authority Logo<input id="stateLogo" type="file" accept="image/*"></label>
-<label>Top Center Emblem / Logo<input id="centerLogo" type="file" accept="image/*"></label>
-<label>Form / Right Logo<input id="formLogo" type="file" accept="image/*"></label>
-<label>Authorized Signature<input id="signature" type="file" accept="image/*"></label>
-<label>Seal / Stamp<input id="seal" type="file" accept="image/*"></label>
+<div class="full assets">
+<label>Left State / Authority Logo<input type="file" id="stateLogo" accept="image/*"></label>
+<label>Top Center Emblem / Logo<input type="file" id="centerLogo" accept="image/*"></label>
+<label>Right Form Logo<input type="file" id="formLogo" accept="image/*"></label>
+<label>Signature<input type="file" id="signature" accept="image/*"></label>
+<label>Seal / Stamp<input type="file" id="seal" accept="image/*"></label>
 </div>
-
-<label><input id="isActive" type="checkbox" checked> Active</label>
-<div class="full">
-<button class="primary" id="saveBtn" type="submit">Save Master</button>
-<button type="button" id="cancelEdit" hidden>Cancel Edit</button>
-<span id="message"></span>
-</div>
-</form>
-</section>
-
-<section class="panel"><h2>Saved Hospital / Local Body Masters</h2><div id="masterList">Loading...</div></section>
+<label><input type="checkbox" id="isActive" checked> Active</label>
+<div class="full"><button class="primary" id="save" type="submit">Save Master</button> <button type="button" id="cancel" hidden>Cancel Edit</button> <span id="msg"></span></div>
+</form></section>
+<section class="panel"><h2>Saved Masters</h2><div id="list">Loading...</div></section>
 </main></div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script><script src="js/auth.js"></script>
-<script src="js/all-india-districts.js"></script><script src="js/hospital-master.js"></script>
+<script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/hospital-page1-master.js"></script>
 </body></html>
