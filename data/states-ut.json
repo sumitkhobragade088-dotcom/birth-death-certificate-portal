@@ -1,4 +1,13 @@
 {
-  "status": "foundation",
-  "note": "Complete State/UT \u2192 District \u2192 Local Body dataset will be implemented in Point 5."
+  "states": [
+    "Maharashtra",
+    "Madhya Pradesh",
+    "Gujarat",
+    "Karnataka",
+    "Rajasthan",
+    "West Bengal",
+    "Punjab",
+    "Delhi"
+  ],
+  "note": "Full All-India dataset is Point 5."
 }

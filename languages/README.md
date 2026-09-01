@@ -1,2 +1,2 @@
 # Languages
-State-wise language files/configurations will be implemented in Point 5.
+State-wise language mapping will be completed in Point 5.

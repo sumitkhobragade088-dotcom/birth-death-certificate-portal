@@ -1,2 +1,2 @@
-# Certificate Templates
-State/type/language-specific templates will be added later. Development templates must remain SAMPLE / UNOFFICIAL.
+# Templates
+Maharashtra Form-5-style configurable layout foundation included in `form5-template.html`.
