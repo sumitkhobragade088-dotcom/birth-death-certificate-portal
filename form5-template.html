@@ -16,4 +16,12 @@
 <p><b>ADDRESS AT TIME OF BIRTH:</b> [ADDRESS]</p><p><b>PERMANENT ADDRESS:</b> [ADDRESS]</p>
 <p><b>REGISTRATION NUMBER:</b> [NUMBER]</p><p><b>REMARKS:</b> [REMARKS]</p></div>
 <div class="cert-bottom"><div class="qr-box">QR</div><div class="signature">Authorized Signature<br><b>[DESIGNATION]</b><br>[LOCAL AUTHORITY]</div></div>
-</div><p class="back"><a href="admin.html">← Back to Dashboard</a></p></main></body></html>
+</div><p class="back"><a href="admin.html">← Back to Dashboard</a></p></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth.js"></script>
+<script>
+(async()=>{ if(!window.birthPortalAuth?.ready){ alert(window.birthPortalAuth?.error || "Supabase config missing"); return; } await window.birthPortalAuth.requireAdmin(); })();
+</script>
+
+</body></html>

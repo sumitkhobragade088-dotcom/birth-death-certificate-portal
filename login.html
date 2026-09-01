@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Login - Birth Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="landing">
+  <main class="login-card">
+    <div class="tag">SECURE ADMIN LOGIN</div>
+    <h1>Birth & Death Certificate Portal</h1>
+    <p>Authorized admin access only.</p>
+
+    <form id="loginForm" class="login-form">
+      <label>Email
+        <input id="email" type="email" autocomplete="username" required>
+      </label>
+      <label>Password
+        <input id="password" type="password" autocomplete="current-password" required>
+      </label>
+      <button id="loginBtn" class="primary" type="submit">Login</button>
+    </form>
+
+    <p id="loginMessage" class="login-message"></p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    const form = document.getElementById("loginForm");
+    const msg = document.getElementById("loginMessage");
+    const btn = document.getElementById("loginBtn");
+
+    const params = new URLSearchParams(location.search);
+    if (params.get("error") === "not_admin") {
+      msg.textContent = "This account is not an active portal admin.";
+    }
+
+    if (!window.birthPortalAuth?.ready) {
+      msg.textContent = window.birthPortalAuth?.error || "Supabase configuration missing.";
+      btn.disabled = true;
+    } else {
+      window.birthPortalAuth.getSession().then(session => {
+        if (session) location.replace("admin.html");
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        msg.textContent = "Checking...";
+        btn.disabled = true;
+
+        const { error } = await window.birthPortalAuth.client.auth.signInWithPassword({
+          email: document.getElementById("email").value.trim(),
+          password: document.getElementById("password").value
+        });
+
+        if (error) {
+          msg.textContent = error.message;
+          btn.disabled = false;
+          return;
+        }
+
+        const gate = await window.birthPortalAuth.requireAdmin();
+        if (gate) location.replace("admin.html");
+      });
+    }
+  </script>
+</body>
+</html>

@@ -17,4 +17,12 @@
 <h3 class="full">4. Registration</h3>
 <label>Date of Registration<input type="date"></label><label>Remarks<input></label>
 <div class="full"><button type="button" class="primary" onclick="location.href='form5-template.html'">Preview Template</button> <button type="reset" class="secondary">Reset Form</button></div>
-</form></section></main></div></body></html>
+</form></section></main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth.js"></script>
+<script>
+(async()=>{ if(!window.birthPortalAuth?.ready){ alert(window.birthPortalAuth?.error || "Supabase config missing"); return; } await window.birthPortalAuth.requireAdmin(); })();
+</script>
+
+</body></html>

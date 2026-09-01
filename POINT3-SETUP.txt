@@ -1,0 +1,23 @@
+POINT 3 - ADMIN LOGIN + DASHBOARD
+
+1. Open js/supabase-config.js
+2. Paste:
+   - Supabase Project URL
+   - Supabase anon/publishable key
+3. Never paste service_role key.
+4. Upload all files to GitHub repository root.
+5. Open login.html (or index.html).
+6. Login with the Supabase Auth user that was linked to public.admins.
+7. Dashboard will read live certificate counts from Supabase.
+8. Logout uses Supabase Auth signOut().
+
+Already included:
+- Secure admin login
+- Admin-only authorization check
+- Session guard on admin work pages
+- Dashboard statistics from certificates table
+- Recent certificates table
+- Logout
+- Hospital / Local Body list stored in Supabase (basic record fields)
+
+Logo/signature/seal file upload to Storage will be connected when the full hospital asset upload workflow is completed.
