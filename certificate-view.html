@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="css/style.css"><style>@media print{.no-print{display:none!important}.certificate-sheet{box-shadow:none;margin:0}}</style></head>
 <body><main class="content"><div class="no-print"><a href="certificates.html">← Back</a> <button class="primary" onclick="window.print()">Print / Save PDF</button></div>
 <section id="sheet" class="certificate-sheet"><div class="demo-mark">DEMO / UNOFFICIAL</div><h1>Birth & Death Certificate Portal</h1><h2 id="title">Certificate</h2>
-<div class="certificate-grid"><b>Certificate Number</b><span id="number"></span><b>Registration Number</b><span id="reg"></span><b>Name</b><span id="name"></span>
-<b>Gender</b><span id="gender"></span><b>Date of Event</b><span id="date"></span><b>Place of Event</b><span id="place"></span><b>Father</b><span id="father"></span>
-<b>Mother</b><span id="mother"></span><b>Spouse</b><span id="spouse"></span><b>State</b><span id="stateName"></span><b>District</b><span id="districtName"></span>
+<div class="certificate-grid"><b>Certificate Number</b><span id="number"></span><b>Registration Number</b><span id="reg"></span><b>Name / Local Name</b><span><span id="name"></span><br><span id="nameLocal"></span></span>
+<b>Gender</b><span id="gender"></span><b>Date of Event</b><span id="date"></span><b>Place of Event / Local</b><span><span id="place"></span><br><span id="placeLocal"></span></span><b>Father / Local</b><span><span id="father"></span><br><span id="fatherLocal"></span></span>
+<b>Mother / Local</b><span><span id="mother"></span><br><span id="motherLocal"></span></span><b>Spouse</b><span id="spouse"></span><b>State</b><span id="stateName"></span><b>District</b><span id="districtName"></span>
 <b>Local Body</b><span id="bodyName"></span><b>Issue Date</b><span id="issue"></span></div>
 <div class="verify-box"><div id="qr"></div><p>Verification link:<br><span id="verifyUrl"></span></p></div></section><p id="message"></p></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>

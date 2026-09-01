@@ -22,6 +22,13 @@
    if(!state.value)return;
    const {data}=await db.from("districts").select("id,name_en").eq("state_id",state.value).order("name_en");
    (data||[]).forEach(d=>district.add(new Option(d.name_en,d.id)));
+   // If Supabase district rows are not seeded yet, use the built-in All India district map.
+   const selectedCode=state.options[state.selectedIndex]?.dataset?.code;
+   if((!data || !data.length) && selectedCode && window.ALL_INDIA_DISTRICTS?.[selectedCode]){
+     window.ALL_INDIA_DISTRICTS[selectedCode].forEach(name=>{
+       const o=new Option(name,""); o.dataset.fallbackName=name; district.add(o);
+     });
+   }
    await loadBodies();
  }
  async function loadBodies(){
@@ -50,7 +57,15 @@
        aadhaar_number:g("aadhaar"), father_aadhaar:g("fatherAadhaar"), mother_aadhaar:g("motherAadhaar"),
        address_at_event:g("addressEvent"), permanent_address:g("permanentAddress"),
        registration_date:g("registrationDate"), issue_date:g("issueDate"), remarks:g("remarks"),
-       status:"active", created_by:gate.session.user.id, updated_by:gate.session.user.id
+       status:"active", created_by:gate.session.user.id, updated_by:gate.session.user.id,
+       extra_fields:{
+         local_language:window.BIRTH_PORTAL_ACTIVE_LANGUAGE||"en",
+         district_name_fallback:district.options[district.selectedIndex]?.dataset?.fallbackName||null,
+         person_name_local:g("personNameLocal"), place_of_event_local:g("eventPlaceLocal"),
+         father_name_local:g("fatherNameLocal"), mother_name_local:g("motherNameLocal"),
+         spouse_name_local:g("spouseNameLocal"), address_at_event_local:g("addressEventLocal"),
+         permanent_address_local:g("permanentAddressLocal"), remarks_local:g("remarksLocal")
+       }
      };
      const {data,error}=await db.from("certificates").insert(payload).select("id,certificate_number,qr_verification_id").single();
      if(error)throw error;

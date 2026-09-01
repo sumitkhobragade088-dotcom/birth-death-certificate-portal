@@ -1,0 +1,12 @@
+FIX INCLUDED
+1. Maharashtra selection now keeps English + Marathi together instead of replacing English.
+2. Important data fields have a separate local-language input.
+   Example:
+   Full Name / पूर्ण नाव  [Rahul XYZ]
+   पूर्ण नाव              [राहुल XYZ]
+3. Maharashtra district dropdown contains all 36 districts even if the Supabase districts table is still empty.
+4. Local-language values are stored inside certificates.extra_fields.
+5. Certificate view shows English + local-language values.
+6. SUPABASE_MAHARASHTRA_DISTRICTS.sql is included to permanently seed Maharashtra districts in Supabase.
+
+The fallback makes Maharashtra testing work immediately after GitHub upload.

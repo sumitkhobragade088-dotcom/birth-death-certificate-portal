@@ -11,20 +11,20 @@
 <label>District<select id="district"><option value="">Select District</option></select></label>
 <label>Hospital / Local Body<select id="localBody"><option value="">Select saved authority</option></select></label>
 <h3 class="full">Child Information</h3>
-<label>Full Name<input id="personName" required></label><label>Aadhaar Number<input id="aadhaar"></label>
+<label>Full Name<input id="personName" required></label><label class="local-field" data-local-for="personName">पूर्ण नाव<input id="personNameLocal" data-local-input="personName" placeholder="पूर्ण नाव"></label><label>Aadhaar Number<input id="aadhaar"></label>
 <label>Gender<select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></label>
-<label>Date of Birth<input id="eventDate" type="date" required></label><label>Place of Birth<input id="eventPlace"></label>
+<label>Date of Birth<input id="eventDate" type="date" required></label><label>Place of Birth<input id="eventPlace"></label><label class="local-field" data-local-for="eventPlace">जन्म ठिकाण<input id="eventPlaceLocal" data-local-input="eventPlace" placeholder="जन्म ठिकाण"></label>
 <h3 class="full">Parents</h3>
-<label>Father Name<input id="fatherName"></label><label>Father Aadhaar<input id="fatherAadhaar"></label>
-<label>Mother Name<input id="motherName"></label><label>Mother Aadhaar<input id="motherAadhaar"></label>
+<label>Father Name<input id="fatherName"></label><label class="local-field" data-local-for="fatherName">वडिलांचे नाव<input id="fatherNameLocal" data-local-input="fatherName" placeholder="वडिलांचे नाव"></label><label>Father Aadhaar<input id="fatherAadhaar"></label>
+<label>Mother Name<input id="motherName"></label><label class="local-field" data-local-for="motherName">आईचे नाव<input id="motherNameLocal" data-local-input="motherName" placeholder="आईचे नाव"></label><label>Mother Aadhaar<input id="motherAadhaar"></label>
 <h3 class="full">Address</h3>
-<label>Address at Birth<textarea id="addressEvent"></textarea></label><label>Permanent Address<textarea id="permanentAddress"></textarea></label>
+<label>Address at Birth<textarea id="addressEvent"></textarea></label><label class="local-field" data-local-for="addressEvent">जन्मावेळचा पत्ता<input id="addressEventLocal" data-local-input="addressEvent" placeholder="जन्मावेळचा पत्ता"></label><label>Permanent Address<textarea id="permanentAddress"></textarea></label><label class="local-field" data-local-for="permanentAddress">कायमचा पत्ता<input id="permanentAddressLocal" data-local-input="permanentAddress" placeholder="कायमचा पत्ता"></label>
 <h3 class="full">Registration</h3>
 <label>Registration Number<input id="registrationNumber"></label><label>Date of Registration<input id="registrationDate" type="date"></label>
-<label>Issue Date<input id="issueDate" type="date"></label><label>Remarks<input id="remarks"></label>
+<label>Issue Date<input id="issueDate" type="date"></label><label>Remarks<input id="remarks"></label><label class="local-field" data-local-for="remarks">शेरा<input id="remarksLocal" data-local-input="remarks" placeholder="शेरा"></label>
 <div class="full"><button class="primary" type="submit">Save Birth Certificate</button> <button class="secondary" type="reset">Reset</button></div>
 <p id="formMessage" class="full login-message"></p>
 </form></section></main></div>
 <script>window.CERTIFICATE_TYPE="birth";</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/state-language.js"></script><script src="js/certificate-form.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/state-language.js"></script><script src="js/all-india-districts.js"></script><script src="js/certificate-form.js"></script>
 </body></html>

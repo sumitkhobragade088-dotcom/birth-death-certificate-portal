@@ -11,19 +11,19 @@
 <label>District<select id="district"><option value="">Select District</option></select></label>
 <label>Hospital / Local Body<select id="localBody"><option value="">Select saved authority</option></select></label>
 <h3 class="full">Deceased Person</h3>
-<label>Full Name<input id="personName" required></label><label>Aadhaar Number<input id="aadhaar"></label>
+<label>Full Name<input id="personName" required></label><label class="local-field" data-local-for="personName">पूर्ण नाव<input id="personNameLocal" data-local-input="personName" placeholder="पूर्ण नाव"></label><label>Aadhaar Number<input id="aadhaar"></label>
 <label>Gender<select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></label>
-<label>Date of Death<input id="eventDate" type="date" required></label><label>Place of Death<input id="eventPlace"></label>
+<label>Date of Death<input id="eventDate" type="date" required></label><label>Place of Death<input id="eventPlace"></label><label class="local-field" data-local-for="eventPlace">मृत्यू ठिकाण<input id="eventPlaceLocal" data-local-input="eventPlace" placeholder="मृत्यू ठिकाण"></label>
 <h3 class="full">Family Details</h3>
-<label>Father Name<input id="fatherName"></label><label>Mother Name<input id="motherName"></label><label>Spouse Name<input id="spouseName"></label>
+<label>Father Name<input id="fatherName"></label><label class="local-field" data-local-for="fatherName">वडिलांचे नाव<input id="fatherNameLocal" data-local-input="fatherName" placeholder="वडिलांचे नाव"></label><label>Mother Name<input id="motherName"></label><label class="local-field" data-local-for="motherName">आईचे नाव<input id="motherNameLocal" data-local-input="motherName" placeholder="आईचे नाव"></label><label>Spouse Name<input id="spouseName"></label><label class="local-field" data-local-for="spouseName">पती/पत्नीचे नाव<input id="spouseNameLocal" data-local-input="spouseName" placeholder="पती/पत्नीचे नाव"></label>
 <h3 class="full">Address</h3>
-<label>Address at Death<textarea id="addressEvent"></textarea></label><label>Permanent Address<textarea id="permanentAddress"></textarea></label>
+<label>Address at Death<textarea id="addressEvent"></textarea></label><label class="local-field" data-local-for="addressEvent">मृत्यूवेळचा पत्ता<input id="addressEventLocal" data-local-input="addressEvent" placeholder="मृत्यूवेळचा पत्ता"></label><label>Permanent Address<textarea id="permanentAddress"></textarea></label><label class="local-field" data-local-for="permanentAddress">कायमचा पत्ता<input id="permanentAddressLocal" data-local-input="permanentAddress" placeholder="कायमचा पत्ता"></label>
 <h3 class="full">Registration</h3>
 <label>Registration Number<input id="registrationNumber"></label><label>Date of Registration<input id="registrationDate" type="date"></label>
-<label>Issue Date<input id="issueDate" type="date"></label><label>Remarks<input id="remarks"></label>
+<label>Issue Date<input id="issueDate" type="date"></label><label>Remarks<input id="remarks"></label><label class="local-field" data-local-for="remarks">शेरा<input id="remarksLocal" data-local-input="remarks" placeholder="शेरा"></label>
 <div class="full"><button class="primary" type="submit">Save Death Certificate</button> <button class="secondary" type="reset">Reset</button></div>
 <p id="formMessage" class="full login-message"></p>
 </form></section></main></div>
 <script>window.CERTIFICATE_TYPE="death";</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/state-language.js"></script><script src="js/certificate-form.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/state-language.js"></script><script src="js/all-india-districts.js"></script><script src="js/certificate-form.js"></script>
 </body></html>

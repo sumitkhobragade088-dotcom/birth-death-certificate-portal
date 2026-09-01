@@ -14,3 +14,7 @@
 #search{padding:11px;border-radius:9px;border:1px solid #31577c;background:#091b36;color:#fff;min-width:280px}
 
 .language-badge{padding:8px 12px;border:1px solid #31577c;border-radius:999px;white-space:nowrap;font-weight:700}.form-grid label{unicode-bidi:plaintext}
+
+.local-field{border-left:3px solid currentColor;padding-left:10px}
+.local-field input{font-size:1rem}
+.language-badge{max-width:100%;overflow:hidden;text-overflow:ellipsis}

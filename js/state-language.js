@@ -199,3 +199,53 @@
 
   window.birthPortalStateLanguage={STATE_LANGUAGE,LANG_NAME,T,translateFormByStateCode};
 })();
+
+(function(){
+  const engine=window.birthPortalStateLanguage;
+  if(!engine) return;
+  const original=engine.translateFormByStateCode;
+  engine.translateFormByStateCode=function(code){
+    original(code);
+    const lang=engine.STATE_LANGUAGE[code]||"hi";
+    const d=Object.assign({},engine.T.en,engine.T[lang]||{});
+    document.documentElement.dir="ltr";
+
+    // Header bilingual
+    const type=window.CERTIFICATE_TYPE||"birth";
+    const title=document.querySelector(".content header h1");
+    if(title){
+      const en=type==="birth"?engine.T.en.birthTitle:engine.T.en.deathTitle;
+      const local=type==="birth"?d.birthTitle:d.deathTitle;
+      title.textContent=(lang==="en"||local===en)?en:`${en} / ${local}`;
+    }
+
+    const labels={
+      state:["State",d.state],district:["District",d.district],localBody:["Hospital / Local Body",d.localBody],
+      personName:["Full Name",d.fullName],aadhaar:["Aadhaar Number",d.aadhaar],gender:["Gender",d.gender],
+      eventDate:[type==="birth"?"Date of Birth":"Date of Death",type==="birth"?d.dob:d.dod],
+      eventPlace:[type==="birth"?"Place of Birth":"Place of Death",type==="birth"?d.pob:d.pod],
+      fatherName:["Father Name",d.father],motherName:["Mother Name",d.mother],spouseName:["Spouse Name",d.spouse],
+      fatherAadhaar:["Father Aadhaar",d.fatherAadhaar],motherAadhaar:["Mother Aadhaar",d.motherAadhaar],
+      addressEvent:[type==="birth"?"Address at Birth":"Address at Death",type==="birth"?d.addressBirth:d.addressDeath],
+      permanentAddress:["Permanent Address",d.permanent],registrationNumber:["Registration Number",d.regNo],
+      registrationDate:["Date of Registration",d.regDate],issueDate:["Issue Date",d.issueDate],remarks:["Remarks",d.remarks]
+    };
+    Object.entries(labels).forEach(([id,a])=>{
+      const el=document.getElementById(id), label=el?.closest("label");
+      if(label?.firstChild) label.firstChild.nodeValue=(a[1]&&a[1]!==a[0])?`${a[0]} / ${a[1]}`:a[0];
+    });
+
+    // Local input labels follow the selected state's language.
+    const localMap={
+      personNameLocal:d.fullName,eventPlaceLocal:type==="birth"?d.pob:d.pod,
+      fatherNameLocal:d.father,motherNameLocal:d.mother,spouseNameLocal:d.spouse,
+      addressEventLocal:type==="birth"?d.addressBirth:d.addressDeath,
+      permanentAddressLocal:d.permanent,remarksLocal:d.remarks
+    };
+    Object.entries(localMap).forEach(([id,text])=>{
+      const el=document.getElementById(id), label=el?.closest("label");
+      if(el&&label){ label.firstChild.nodeValue=`${text||"Local Language"} `; el.placeholder=text||"Local Language"; }
+    });
+    window.BIRTH_PORTAL_ACTIVE_LANGUAGE=lang;
+  };
+})();
