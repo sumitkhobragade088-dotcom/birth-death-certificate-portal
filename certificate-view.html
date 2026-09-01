@@ -1,11 +1,52 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Certificate View</title>
-<link rel="stylesheet" href="css/style.css"><style>@media print{.no-print{display:none!important}.certificate-sheet{box-shadow:none;margin:0}}</style></head>
-<body><main class="content"><div class="no-print"><a href="certificates.html">← Back</a> <button class="primary" onclick="window.print()">Print / Save PDF</button></div>
-<section id="sheet" class="certificate-sheet"><div class="demo-mark">DEMO / UNOFFICIAL</div><h1>Birth & Death Certificate Portal</h1><h2 id="title">Certificate</h2>
-<div class="certificate-grid"><b>Certificate Number</b><span id="number"></span><b>Registration Number</b><span id="reg"></span><b>Name / Local Name</b><span><span id="name"></span><br><span id="nameLocal"></span></span>
-<b>Gender</b><span id="gender"></span><b>Date of Event</b><span id="date"></span><b>Place of Event / Local</b><span><span id="place"></span><br><span id="placeLocal"></span></span><b>Father / Local</b><span><span id="father"></span><br><span id="fatherLocal"></span></span>
-<b>Mother / Local</b><span><span id="mother"></span><br><span id="motherLocal"></span></span><b>Spouse</b><span id="spouse"></span><b>State</b><span id="stateName"></span><b>District</b><span id="districtName"></span>
-<b>Local Body</b><span id="bodyName"></span><b>Issue Date</b><span id="issue"></span></div>
-<div class="verify-box"><div id="qr"></div><p>Verification link:<br><span id="verifyUrl"></span></p></div></section><p id="message"></p></main>
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Certificate</title><link rel="stylesheet" href="css/style.css">
+<style>
+body{background:#1b1d22;margin:0;font-family:"Times New Roman",serif}
+.cert-toolbar{max-width:210mm;margin:12px auto;color:#fff;font-family:Arial,sans-serif}
+.cert-toolbar a{color:#fff;margin-right:14px}.cert-toolbar button{padding:9px 16px}
+.gov-sheet{box-sizing:border-box;width:210mm;min-height:297mm;margin:0 auto 20px;background:#fff;color:#111;padding:7mm;border:1px solid #222;position:relative}
+.gov-inner{min-height:281mm;border:4px double #777;padding:7mm 6mm 11mm;box-sizing:border-box;position:relative}
+.gov-top{display:grid;grid-template-columns:28mm 1fr 28mm;align-items:start;min-height:52mm}
+.serial{font-weight:700;font-size:12px}.authority-logo,.form-logo{height:22mm;max-width:25mm;object-fit:contain;margin-top:5px;display:none}
+.gov-center{text-align:center}.gov-center .state{font-size:17px;font-weight:800;color:#172d73;text-transform:uppercase}
+.gov-center .state-local{font-size:15px;font-weight:700;color:#172d73;margin-top:2px}
+.gov-center .department,.gov-center .body{font-size:14px;font-weight:700;color:#172d73;margin-top:4px}
+.gov-center .body-local{font-size:13px;font-weight:700;color:#172d73}
+.formbox{text-align:center;font-weight:800;font-size:13px}.formbox .formno{font-size:16px}.form-placeholder{height:22mm;display:flex;align-items:center;justify-content:center;border:1px solid #aaa;margin-top:5px;font-size:10px;color:#777}
+.cert-title{text-align:center;margin:5mm 0 7mm}.cert-title h1{font-size:19px;color:#16822b;margin:0}.cert-title h2{font-size:14px;color:#16822b;margin:2px 0 0}
+.legal{font-size:11px;line-height:1.28;margin-bottom:5mm;text-align:justify}.legal p{margin:3px 0}
+.details{font-size:11.5px;line-height:1.35}.row{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin:4.2mm 0}.field.full{grid-column:1/-1}.label{font-weight:800;text-transform:uppercase}.value{margin-top:2px;min-height:15px}.local{margin-left:5px}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin-top:12mm;align-items:end}.qr-note{font-size:10.5px}.qr-note #qr{width:26mm;height:26mm;margin:4px 0}.qr-note img,.qr-note canvas{width:26mm!important;height:26mm!important}.sign{text-align:center;font-size:11px}.signature-img{height:17mm;max-width:45mm;object-fit:contain;display:none;margin:auto}.sign-title{font-weight:800;margin-top:3px}.designation{font-weight:700;color:#253fa0}.footer-slogan{text-align:center;font-size:11px;font-weight:800;color:#243b8d;margin-top:8mm}
+.test-footer{position:absolute;bottom:2.5mm;left:0;right:0;text-align:center;font:8px Arial,sans-serif;letter-spacing:.8px;color:#777}
+@media print{body{background:#fff}.cert-toolbar{display:none}.gov-sheet{margin:0;border:0;width:210mm;height:297mm;min-height:297mm;padding:5mm}.gov-inner{min-height:287mm} @page{size:A4;margin:0}}
+</style></head>
+<body>
+<div class="cert-toolbar"><a href="certificates.html">← Back</a><button onclick="window.print()">Print / Save PDF</button></div>
+<section class="gov-sheet"><div class="gov-inner">
+<div class="gov-top">
+ <div class="serial">S.No. <span id="serial">—</span><br><img id="authorityLogo" class="authority-logo" alt=""></div>
+ <div class="gov-center"><div class="state" id="stateHeading">STATE / UNION TERRITORY</div><div class="state-local" id="stateLocal"></div>
+ <div class="department" id="department">DEPARTMENT OF HEALTH</div><div class="body" id="bodyHeading">LOCAL REGISTRATION AUTHORITY</div><div class="body-local" id="bodyLocal"></div></div>
+ <div class="formbox"><div class="formno" id="formNo">FORM 5</div><div id="formNoLocal"></div><img id="formLogo" class="form-logo" alt=""><div id="formPlaceholder" class="form-placeholder">FORM / AUTHORITY LOGO</div></div>
+</div>
+<div class="cert-title"><h1 id="title">BIRTH CERTIFICATE</h1><h2 id="titleLocal"></h2></div>
+<div class="legal"><p id="legalEn">Certificate information recorded in the Birth & Death Certificate Portal.</p><p id="legalLocal"></p></div>
+<div class="details">
+ <div class="row"><div class="field"><div class="label">NAME / <span id="lName">LOCAL NAME</span></div><div class="value"><span id="name">—</span> / <span id="nameLocal">—</span></div></div><div class="field"><div class="label">SEX / <span id="lGender">GENDER</span></div><div class="value" id="gender">—</div></div></div>
+ <div class="row"><div class="field full"><div class="label">AADHAAR NUMBER</div><div class="value" id="aadhaar">—</div></div></div>
+ <div class="row"><div class="field"><div class="label" id="dateLabel">DATE OF BIRTH</div><div class="value" id="date">—</div></div><div class="field"><div class="label" id="placeLabel">PLACE OF BIRTH</div><div class="value"><span id="place">—</span> / <span id="placeLocal">—</span></div></div></div>
+ <div class="row"><div class="field"><div class="label">NAME OF MOTHER</div><div class="value"><span id="mother">—</span> / <span id="motherLocal">—</span></div></div><div class="field"><div class="label">NAME OF FATHER</div><div class="value"><span id="father">—</span> / <span id="fatherLocal">—</span></div></div></div>
+ <div class="row"><div class="field"><div class="label">AADHAAR NUMBER OF MOTHER</div><div class="value" id="motherAadhaar">—</div></div><div class="field"><div class="label">AADHAAR NUMBER OF FATHER</div><div class="value" id="fatherAadhaar">—</div></div></div>
+ <div class="row"><div class="field"><div class="label" id="addressEventLabel">ADDRESS AT THE TIME OF EVENT</div><div class="value"><span id="addressEvent">—</span><br><span id="addressEventLocal">—</span></div></div><div class="field"><div class="label">PERMANENT ADDRESS</div><div class="value"><span id="permanentAddress">—</span><br><span id="permanentAddressLocal">—</span></div></div></div>
+ <div class="row"><div class="field"><div class="label">REGISTRATION NUMBER</div><div class="value" id="reg">—</div></div><div class="field"><div class="label">DATE OF REGISTRATION</div><div class="value" id="regDate">—</div></div></div>
+ <div class="row"><div class="field"><div class="label">CERTIFICATE NUMBER</div><div class="value" id="number">—</div></div><div class="field"><div class="label">DATE OF ISSUE</div><div class="value" id="issue">—</div></div></div>
+ <div class="row"><div class="field full"><div class="label">REMARKS (IF ANY)</div><div class="value"><span id="remarks">—</span> / <span id="remarksLocal">—</span></div></div></div>
+</div>
+<div class="bottom"><div class="qr-note"><div>Updated On: <span id="updated">—</span></div><div id="qr"></div><b>This QR code can be used to verify this portal record.</b><div id="verifyUrl" style="display:none"></div></div>
+<div class="sign"><img id="signatureImg" class="signature-img" alt=""><div class="sign-title">SIGNATURE OF ISSUING AUTHORITY</div><div class="designation" id="designation">AUTHORIZED REGISTRAR</div><div id="authorityPerson"></div><div id="bodySign"></div></div></div>
+<div class="footer-slogan">ENSURE REGISTRATION OF EVERY BIRTH AND DEATH</div>
+<div class="test-footer">TEST / UNOFFICIAL — DEVELOPMENT OUTPUT</div>
+</div></section><p id="message"></p>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/state-language.js"></script><script src="js/certificate-view.js"></script></body></html>
