@@ -1,26 +1,116 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hospital Management</title><link rel="stylesheet" href="css/style.css"></head><body>
-<div class="app"><aside><h2>Birth Portal</h2><nav><a href="admin.html">Dashboard</a><a href="birth-registration.html">Birth Registration</a>
-<a class="active" href="hospital-management.html">Hospital Management</a><a href="form5-template.html">Templates</a></nav></aside>
-<main class="content"><header><div><h1>Hospital / Local Body Management</h1><p>Add Birth Hospital and maintain Birth Hospital List</p></div></header>
-<section class="panel"><h2>Add Birth Hospital / Local Authority</h2><form id="hospitalForm" class="form-grid">
-<label>State<select id="state"><option>Maharashtra</option></select></label>
-<label>District<input id="district" placeholder="e.g. Gondia"></label>
-<label>Taluka / Block<input id="taluka" placeholder="e.g. Deori"></label>
-<label>Authority Type<select id="type"><option>Hospital</option><option>Municipal Corporation</option><option>Municipal Council</option><option>Nagar Panchayat</option><option>Gram Panchayat</option><option>Other</option></select></label>
-<label>English Name<input id="nameEn" placeholder="e.g. Gram Panchayat Magardoh"></label>
-<label>Local Language Name<input id="nameLocal" placeholder="e.g. ग्राम पंचायत मगरडोह"></label>
-<label>Department<input id="department" value="Department of Health"></label>
-<label>Designation<input id="designation" value="Sub-Registrar (Birth & Death)"></label>
-<label>State / Authority Logo<input type="file" accept="image/*"></label>
-<label>Form Logo<input type="file" accept="image/*"></label>
-<label>Authorized Signature<input type="file" accept="image/*"></label>
-<label>Form Number<input value="Form 5"></label>
-<div class="full"><button class="primary" type="submit">Save Hospital / Authority</button></div></form></section>
-<section class="panel"><h2>Birth Hospital List</h2><div id="hospitalList" class="empty">No saved hospitals in this local demo yet.</div></section>
-</main></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hospital / Local Body Management</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.asset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.asset-grid label{display:block}
+.authority-card{border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px;margin:10px 0}
+.authority-card small{opacity:.8}
+@media(max-width:760px){.asset-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside><h2>Birth Portal</h2><nav>
+<a href="admin.html">Dashboard</a>
+<a href="birth-registration.html">Birth Registration</a>
+<a class="active" href="hospital-management.html">Hospital Management</a>
+<a href="form5-template.html">Templates</a>
+</nav></aside>
+
+<main class="content">
+<header><div><h1>Hospital / Local Body Management</h1>
+<p>State → District → Hospital / Local Authority → Certificate authority details</p></div></header>
+
+<section class="panel">
+<h2>Add Hospital / Local Authority</h2>
+<form id="hospitalForm" class="form-grid">
+<label>State
+<select id="state" required><option value="">Select State</option></select>
+</label>
+
+<label>District
+<select id="district" required><option value="">Select District</option></select>
+</label>
+
+<label>Taluka / Block
+<input id="taluka" placeholder="e.g. Gondia / Deori">
+</label>
+
+<label>Authority Type
+<select id="type">
+<option>Hospital</option>
+<option>Municipal Corporation</option>
+<option>Municipal Council</option>
+<option>Municipality</option>
+<option>Nagar Panchayat</option>
+<option>Gram Panchayat</option>
+<option>Other</option>
+</select>
+</label>
+
+<label>English Name
+<input id="nameEn" required placeholder="e.g. Municipal Council Gondia">
+</label>
+
+<label>Local Language Name
+<input id="nameLocal" placeholder="e.g. नगर परिषद गोंदिया">
+</label>
+
+<label>Department (English)
+<input id="departmentEn" value="Department of Health">
+</label>
+
+<label>Department (Local Language)
+<input id="departmentLocal" placeholder="e.g. आरोग्य विभाग">
+</label>
+
+<label>Authorized Person Name
+<input id="authorizedPerson" placeholder="e.g. Registrar Name">
+</label>
+
+<label>Designation (English)
+<input id="designationEn" value="Sub-Registrar (Birth & Death)">
+</label>
+
+<label>Designation (Local Language)
+<input id="designationLocal" placeholder="e.g. उपनिबंधक (जन्म व मृत्यू)">
+</label>
+
+<label>Authority Address
+<textarea id="address" placeholder="Full office / hospital address"></textarea>
+</label>
+
+<div class="full asset-grid">
+<label>State / Authority Logo
+<input id="stateLogo" type="file" accept="image/png,image/jpeg,image/webp">
+</label>
+<label>Form Logo
+<input id="formLogo" type="file" accept="image/png,image/jpeg,image/webp">
+</label>
+<label>Authorized Signature
+<input id="signature" type="file" accept="image/png,image/jpeg,image/webp">
+</label>
+<label>Seal / Stamp
+<input id="seal" type="file" accept="image/png,image/jpeg,image/webp">
+</label>
+</div>
+
+<div class="full"><button class="primary" id="saveBtn" type="submit">Save Hospital / Authority</button>
+<span id="saveMessage"></span></div>
+</form>
+</section>
+
+<section class="panel"><h2>Hospital / Local Authority List</h2>
+<div id="hospitalList" class="empty">Loading...</div></section>
+</main></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/all-india-districts.js"></script>
 <script src="js/hospital.js"></script>
-
 </body></html>
