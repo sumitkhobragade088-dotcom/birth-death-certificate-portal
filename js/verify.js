@@ -1,0 +1,1 @@
+const p=new URLSearchParams(location.search);const id=p.get('id');if(id){document.getElementById('verificationResult').textContent='Verification ID: '+id+' — database verification will be connected in Point 2.';}

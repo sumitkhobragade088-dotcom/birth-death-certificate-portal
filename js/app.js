@@ -1,0 +1,1 @@
+console.log("Birth & Death Certificate Admin System foundation loaded.");
