@@ -12,3 +12,5 @@
 .certificate-sheet h1,.certificate-sheet h2{text-align:center}.certificate-grid{display:grid;grid-template-columns:220px 1fr;gap:12px;border-top:1px solid #333;padding-top:24px}
 .verify-box{display:flex;gap:20px;align-items:center;margin-top:40px}.demo-mark{position:absolute;inset:42% auto auto 18%;font-size:56px;opacity:.08;transform:rotate(-25deg);font-weight:900}
 #search{padding:11px;border-radius:9px;border:1px solid #31577c;background:#091b36;color:#fff;min-width:280px}
+
+.language-badge{padding:8px 12px;border:1px solid #31577c;border-radius:999px;white-space:nowrap;font-weight:700}.form-grid label{unicode-bidi:plaintext}

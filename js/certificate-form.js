@@ -7,16 +7,27 @@
 
  const {data:states,error:se}=await db.from("states").select("id,code,name_en").order("name_en");
  if(se){msg.textContent=se.message;return}
- states.forEach(s=>state.add(new Option(s.name_en,s.id)));
+ states.forEach(s=>{
+   const opt=new Option(s.name_en,s.id); opt.dataset.code=s.code; state.add(opt);
+ });
  async function loadDistricts(){
-   district.innerHTML='<option value="">Select District</option>'; lb.innerHTML='<option value="">Select saved authority</option>';
+   const selected=state.options[state.selectedIndex];
+   if(selected?.dataset?.code && window.birthPortalStateLanguage){
+     window.birthPortalStateLanguage.translateFormByStateCode(selected.dataset.code);
+   }
+   const lang=window.BIRTH_PORTAL_ACTIVE_LANGUAGE||"en";
+   const d=window.birthPortalStateLanguage ? Object.assign({},window.birthPortalStateLanguage.T.en,window.birthPortalStateLanguage.T[lang]||{}) : {};
+   district.innerHTML=`<option value="">${d.selectDistrict||"Select District"}</option>`;
+   lb.innerHTML=`<option value="">${d.selectAuthority||"Select saved authority"}</option>`;
    if(!state.value)return;
    const {data}=await db.from("districts").select("id,name_en").eq("state_id",state.value).order("name_en");
    (data||[]).forEach(d=>district.add(new Option(d.name_en,d.id)));
    await loadBodies();
  }
  async function loadBodies(){
-   lb.innerHTML='<option value="">Select saved authority</option>'; if(!state.value)return;
+   const lang=window.BIRTH_PORTAL_ACTIVE_LANGUAGE||"en";
+   const d=window.birthPortalStateLanguage ? Object.assign({},window.birthPortalStateLanguage.T.en,window.birthPortalStateLanguage.T[lang]||{}) : {};
+   lb.innerHTML=`<option value="">${d.selectAuthority||"Select saved authority"}</option>`; if(!state.value)return;
    let q=db.from("local_bodies").select("id,name_en").eq("state_id",state.value).eq("is_active",true).order("name_en");
    if(district.value)q=q.eq("district_id",district.value);
    const {data}=await q; (data||[]).forEach(x=>lb.add(new Option(x.name_en,x.id)));
